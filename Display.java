@@ -95,10 +95,6 @@ public class Display {
 
     }
 
-    public int toDecimal(String s, int base){
-        return Integer.parseInt(s, base);
-
-    }
 
     public void switchDisplayMode(){
         switch(currentDisplayMode){
@@ -173,6 +169,25 @@ public class Display {
 
     }
     
+    public void switchUnitsMode(String mode){
+        switch(mode){
+            case "degrees" : this.currentUnitsMode = "radians";
+            this.switchUnitsMode();
+            break;
+            
+            case "radians" : this.currentUnitsMode = "degrees";
+            this.switchUnitsMode();
+            break;
+            
+        }
+        
+    }
+    
+    public void setUnitsMode(String mode){
+        this.currentUnitsMode = mode;
+
+    }
+    
 
     public double subtract(double x, double y){
         return x - y;
@@ -240,23 +255,7 @@ public class Display {
     
     public double cubicRoot(double x){
         return Math.cbrt(x);
-
-    public void switchUnitsMode(String mode){
-        switch(mode){
-            case "degrees" : this.currentUnitsMode = "radians";
-            this.switchUnitsMode();
-            break;
-            
-            case "radians" : this.currentUnitsMode = "degrees";
-            this.switchUnitsMode();
-            break;
-            
-        }
-        
     }
+
     
-    public void setUnitsMode(String mode){
-        this.currentUnitsMode = mode;
-
-    }
 }
