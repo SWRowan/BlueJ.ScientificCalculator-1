@@ -4,78 +4,154 @@ public class MainApplication {
         boolean run = true;
         Display display = new Display();
         display.println("TIME TO CALCULATE!");
-
+        
+        double x = display.getDoubleInput("Enter a number");
         while (run){
-
-            double x = display.getDoubleInput("Enter a number");
             String s = display.getStringInput("Enter an operator");
-            double y = display.getDoubleInput("Enter another number");
+            s = s.toLowerCase();
             double result;
-            
-            /**switch(s){
-                case "sin": result = display.sin(x);
-                break;
-                
-                case "cos": result = display.cos(x);
-                break;
-                
-                case "tan": result = display.tan(x);
-                break;
-                
-                case "atan": result = display.atan(x);
-                break;
-                
-                default: result = 0;
-            }*/
 
             switch(s){
                 case "+" : 
                 case "add" : 
                 case "sum" :
-                case "plus":
-                case "Plus": result = display.add(x, y);
+                case "plus": 
+                double addY = display.getDoubleInput("Enter another number");
+                result = display.add(x, addY);
+                display.println("%f %s %f = %f", x, s, addY, result);
+
                 break;
 
                 case "-": 
                 case "subtract": 
-                case "Subtract":
                 case "minus":
-                case "Minus": result = display.subtract(x, y);
+                double subY = display.getDoubleInput("Enter another number");
+                result = display.subtract(x, subY);
+                display.println("%f %s %f = %f", x, s, subY, result);
+
                 break;
 
                 case "/":
                 case "divide":
-                case "Divide": result = display.divide(x, y);
+                case "divided by":
+                double divY = display.getDoubleInput("Enter another number");
+                result = display.divide(x, divY);
+                display.println("%f %s %f = %f", x, s, divY, result);
+
                 break;
 
                 case "*" :
                 case "times":
-                case "Times":
                 case "multiply":
-                case "Multiply": result = display.multiply(x, y);
+                double multiY = display.getDoubleInput("Enter another number");
+                result = display.multiply(x, multiY);
+                display.println("%f %s %f = %f", x, s, multiY, result);
+
                 break;
 
                 case "%" :
                 case "mod":
-                case "Mod":
                 case "remainder":
-                case "Remainder": result = display.modulous(x, y);
+                double modY = display.getDoubleInput("Enter another number");
+                result = display.modulous(x, modY);
+                display.println("%f %s %f = %f", x, s, modY, result);
+
                 break;
 
-                case "^" : result = display.exponent(x, y);
+                case "^" : 
+                double expoY = display.getDoubleInput("Enter another number");
+                result = display.exponent(x, expoY);
+                display.println("%f %s %f = %f", x, s, expoY, result);
+
+                break;
+
+                case "sin": 
+                result = display.sin(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "asin": 
+                result = display.asin(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "sinh": 
+                result = display.sinh(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+
+                case "cos": 
+                result = display.cos(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "acos": 
+                result = display.acos(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "cosh": 
+                result = display.cosh(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "tan": 
+                result = display.tan(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+
+                case "atan": 
+                result = display.atan(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "tanh": 
+                result = display.tanh(x);
+                display.println("%s %f = %f", s, x, result);
+
+                break;
+                
+                case "theta":
+                double thetaY = display.getDoubleInput("Enter another number");
+                result = display.theta(thetaY, x);
+                display.println("%f %s %f = %f", thetaY, s, x, result);
+                
+                break;
+                
+                case "sqrt":
+                case "root":
+                case "square root":
+                result = display.squareRoot(x);
+                display.println("%s %f = %f", s, x, result);
+                
+                break;
+                
+                case "cbrt":
+                result = display.cubicRoot(x);
+                display.println("%s %f = %f", s, x, result);
+                
                 break;
 
                 default : result = 0;
+
                 break;
 
             }
-            display.println("%f %s %f = %f", x, s, y, result);
 
             String quit = display.getStringInput("Enter 'quit' to stop");
-
+            
             if (quit.equals("quit")){
                 run = false;
-
+            }else{
+            x = Double.valueOf(quit);
             }
         }
     }

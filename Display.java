@@ -121,10 +121,22 @@ public class Display {
         return Math.sin(x);
     }
     
+    public double asin(double x){
+        return Math.asin(x);
+    }
+    
     public double cos(double x){
         return Math.cos(x);
     }
     
+    public double cosh(double x){
+        return Math.cosh(x);
+    }
+    
+    public double sinh(double x){
+        return Math.sinh(x);
+    }
+
     public double acos(double x){
         return Math.acos(x);
     }
@@ -135,5 +147,17 @@ public class Display {
     
     public double atan(double x){
         return Math.atan(x);
+    }
+    
+    public double tanh(double x){
+        return Math.tanh(x);
+    }
+    
+    public double theta(double x, double y){
+        return Math.atan2(y,x);
+    }
+    
+    public double cubicRoot(double x){
+        return Math.cbrt(x);
     }
 }
