@@ -50,7 +50,11 @@ public class Display {
         return this.scanner;
     }
     
-       /**
+    public PrintStream getPrintStream(){
+        return this.out;
+    }
+    
+    /**
      * @param prompt : text to display to user
      * @param args   : optional arguments to send for string formatting
      * @return user's input as double
@@ -61,7 +65,7 @@ public class Display {
     }
     
     
-     /**
+    /**
      * @param prompt : text to display to user
      * @param args   : optional arguments to send for string formatting
      * @return user's input as String
