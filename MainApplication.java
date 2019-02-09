@@ -5,13 +5,14 @@ public class MainApplication {
         boolean run = true;
         Display display = new Display();
         display.println("TIME TO CALCULATE!");
-        double x = display.getDoubleInput("Enter a number");
+        Double x = display.getDoubleInput("Enter a number");
 
         while (run){
 
             String s = display.getStringInput("\nEnter an operator");
             s = s.toLowerCase();
-            double result = 0;
+            
+            Double result = 0.0;
 
             switch(s){
                 case "+" : 
@@ -21,6 +22,7 @@ public class MainApplication {
                 double addY = display.getDoubleInput("Enter another number");
                 result = display.add(x, addY);
                 display.println("%f %s %f = %f", x, s, addY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -30,6 +32,7 @@ public class MainApplication {
                 double subY = display.getDoubleInput("Enter another number");
                 result = display.subtract(x, subY);
                 display.println("%f %s %f = %f", x, s, subY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -39,6 +42,7 @@ public class MainApplication {
                 double divY = display.getDoubleInput("Enter another number");
                 result = display.divide(x, divY);
                 display.println("%f %s %f = %f", x, s, divY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -48,6 +52,7 @@ public class MainApplication {
                 double multiY = display.getDoubleInput("Enter another number");
                 result = display.multiply(x, multiY);
                 display.println("%f %s %f = %f", x, s, multiY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -57,6 +62,7 @@ public class MainApplication {
                 double modY = display.getDoubleInput("Enter another number");
                 result = display.modulous(x, modY);
                 display.println("%f %s %f = %f", x, s, modY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -64,60 +70,70 @@ public class MainApplication {
                 double expoY = display.getDoubleInput("Enter another number");
                 result = display.exponent(x, expoY);
                 display.println("%f %s %f = %f", x, s, expoY, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "sin": 
                 result = display.sin(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "asin": 
                 result = display.asin(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "sinh": 
                 result = display.sinh(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "cos": 
                 result = display.cos(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "acos": 
                 result = display.acos(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "cosh": 
                 result = display.cosh(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "tan": 
                 result = display.tan(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "atan": 
                 result = display.atan(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "tanh": 
                 result = display.tanh(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -125,6 +141,7 @@ public class MainApplication {
                 double thetaY = display.getDoubleInput("Enter another number");
                 result = display.theta(thetaY, x);
                 display.println("%f %s %f = %f", thetaY, s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -133,12 +150,14 @@ public class MainApplication {
                 case "square root":
                 result = display.squareRoot(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
                 case "cbrt":
                 result = display.cubicRoot(x);
                 display.println("%s %f = %f", s, x, result);
+                display.changeDisplay(result.toString());
 
                 break;
 
@@ -214,16 +233,32 @@ public class MainApplication {
 
                 break;
                 
-                default : result = 0;
+                default : result = 0.0;
             }
 
-            String quit = display.getStringInput("Enter 'quit' to stop or enter another number");
+            String m = display.getStringInput("Enter 'm+' to save the value.  Enter 'c' to clear");
+            if(m.equals("m+")){
+                display.setMemoryValue(display.getCurrentDisplay());
+                display.println("%s has been saved to memory.", display.getMemoryValue()); 
+            }
+            
+            String quit = display.getStringInput("Enter 'quit' to stop, 'mrc' to use saved value, or enter another number");
 
+            
+            
             if (quit.equals("quit")){
                 run = false; 
             }
-            else {
-                x = Double.valueOf(quit);
+            
+            
+            if(run){
+                if(quit.equals("mrc")){
+                    x = Double.valueOf(display.getMemoryValue());
+                    display.println(display.getMemoryValue());
+                }
+                else{
+                    x = Double.valueOf(quit);
+                }
                 display.setCurrentDisplayMode("decimal");
                 display.setUnitsMode("degrees");
             }
