@@ -15,7 +15,9 @@ public class Display {
     
     private final Scanner scanner;
     private final PrintStream out;
-    private double currentDisplay = 0;
+    private String currentDisplay = "0";
+    private String memoryValue = "0";
+    private String currentDisplayMode = "decimal";
     
 
     public Display() {
@@ -77,20 +79,80 @@ public class Display {
         return this.scanner.next();
     }
    
-    public Double getCurrentDisplay(){
+    public String getCurrentDisplay(){
         return this.currentDisplay;
     }
     
     public void clearDisplay(){
-        this.currentDisplay = 0;
+        this.currentDisplay = "0";
     }
     
-    public void changeDisplay(Double d){
-        this.currentDisplay = 0;
+    public void changeDisplay(String s){
+        this.currentDisplay = s;
     }
     
     public double add(double d1, double d2){
         return d1 + d2;
     }
     
+    
+    public int toDecimal(String s, int base){
+        return Integer.parseInt(s, base);
+        
+    }
+    
+    public void switchDisplayMode(){
+        switch(currentDisplayMode){
+            case "decimal" : currentDisplayMode = "binary";
+            Integer intValueBinary = (int)Math.round(Double.valueOf(currentDisplay));
+            currentDisplay = Integer.toBinaryString(intValueBinary);
+            print("Binary: ");
+            break;
+            
+            case "binary" : currentDisplayMode = "octal";
+            Integer intValueOctal = (int)Math.round(Double.valueOf(currentDisplay));
+            currentDisplay = Integer.toOctalString(intValueOctal);
+            print("Octal: ");
+            break;
+            
+            case "octal" : currentDisplayMode = "hexadecimal";
+            Integer intValueHex = (int)Math.round(Double.valueOf(currentDisplay));
+            currentDisplay = Integer.toHexString(intValueHex);
+            print("Hexadecimal: ");
+            break;
+            
+            case "hexadecimal" : currentDisplayMode = "decimal";
+            print("Decimal: ");
+           
+            break;
+        }
+    }
+    
+    public void switchDisplayMode(String mode){
+        switch(mode){
+            case "binary" : this.currentDisplayMode = "decimal";
+            this.switchDisplayMode();
+            break;
+            
+            case "octal" : this.currentDisplayMode = "binary";
+            switchDisplayMode();
+            break;
+            
+            case "hex" : this.currentDisplayMode = "octal";
+            switchDisplayMode();
+            break;
+        }
+    }
+    
+    public void setCurrentDisplayMode(String mode){
+        this.currentDisplayMode = mode;
+    }
+    
+    public void setMemoryValue(String s){
+        this.memoryValue = s;
+    }
+    
+    public String getMemoryValue(){
+        return this.memoryValue;
+    }
 }
