@@ -112,4 +112,28 @@ public class Display {
     public double exponent(double x, double y){
         return Math.pow(x, y);
     }
+    
+    public double squareRoot(double x){
+        return Math.sqrt(x);
+    }
+    
+    public double sin(double x){
+        return Math.sin(x);
+    }
+    
+    public double cos(double x){
+        return Math.cos(x);
+    }
+    
+    public double acos(double x){
+        return Math.acos(x);
+    }
+    
+    public double tan(double x){
+        return Math.tan(x);
+    }
+    
+    public double atan(double x){
+        return Math.atan(x);
+    }
 }
