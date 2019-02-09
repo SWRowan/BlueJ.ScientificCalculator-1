@@ -10,10 +10,8 @@ public class MainApplication {
         double x = display.getDoubleInput("Enter a number");
         
         while (run){
-            
-        String s = display.getStringInput("Enter an operator");
-        
-        double result = 0;
+            String s = display.getStringInput("\nEnter an operator");
+            double result = 0;
         
         switch(s){
             case "+" : double y = display.getDoubleInput("Enter another number");
@@ -63,21 +61,43 @@ public class MainApplication {
             display.changeDisplay(display.getMemoryValue());
             display.println(display.getCurrentDisplay());
             break;
-
+            
+            case "changeunits" :
+            while (s.equals("changeunits")){
+                display.changeDisplay("" + x);
+                display.switchUnitsMode();
+                display.println(display.getCurrentDisplay() + "\n");
+                s = display.getStringInput("Enter \"changeunits\" to switch mode again or enter \"back\" to go back.\n");
+            }
+            break;
+            
+            case "degrees" :
+            display.changeDisplay("" + x);
+            display.switchUnitsMode(s);
+            display.println(display.getCurrentDisplay() + "\n");
+            break;
+            
+            case "radians" :
+            display.changeDisplay("" + x);
+            display.switchUnitsMode(s);
+            display.println(display.getCurrentDisplay() + "\n");
+            break;
+            
             default : result = 0;
         }
-        
         
         String quit = display.getStringInput("Enter 'quit' to stop or enter another number");
         
         if (quit.equals("quit")){
             run = false; 
-     
         }
         else {
             x = Double.valueOf(quit);
             display.setCurrentDisplayMode("decimal");
+            display.setUnitsMode("degrees");
         }
     }
+    
     }
+    
 }
