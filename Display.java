@@ -41,8 +41,9 @@ public class Display {
      * @param val  : text to display on console
      * @param args : optional arguments to send for string formatting
      */
+    
     public void println(String val, Object... args) {
-        out.format(val + "\n", args);
+        print(val + "\n", args);
     }
     
     public Scanner getScanner(){
