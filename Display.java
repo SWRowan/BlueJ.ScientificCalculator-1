@@ -15,6 +15,8 @@ public class Display {
     
     private final Scanner scanner;
     private final PrintStream out;
+    private double currentDisplay = 0;
+    
 
     public Display() {
         this(System.in, System.out);
@@ -74,4 +76,18 @@ public class Display {
         println(prompt);
         return this.scanner.next();
     }
+   
+    public Double getCurrentDisplay(){
+        return this.currentDisplay;
+    }
+    
+    public void clearDisplay(){
+        this.currentDisplay = 0;
+    }
+    
+    public void changeDisplay(Double d){
+        this.currentDisplay = 0;
+    }
+    
+    
 }
