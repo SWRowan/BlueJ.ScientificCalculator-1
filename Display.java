@@ -89,9 +89,10 @@ public class Display {
     public void changeDisplay(String s){
         this.currentDisplay = s;
     }
+    
+    public double add(double x, double y){
+        return x + y;
 
-    public double add(double d1, double d2){
-        return d1 + d2;
     }
 
     public int toDecimal(String s, int base){
@@ -172,6 +173,74 @@ public class Display {
 
     }
     
+
+    public double subtract(double x, double y){
+        return x - y;
+    }
+    
+    public double multiply(double x, double y){
+        return x * y;
+    } 
+    
+    public double divide(double x, double y){
+        return x / y;
+    }
+    
+    public double modulous(double x, double y){
+        return x % y;
+    }
+    
+    public double exponent(double x, double y){
+        return Math.pow(x, y);
+    }
+    
+    public double squareRoot(double x){
+        return Math.sqrt(x);
+    }
+    
+    public double sin(double x){
+        return Math.sin(x);
+    }
+    
+    public double asin(double x){
+        return Math.asin(x);
+    }
+    
+    public double cos(double x){
+        return Math.cos(x);
+    }
+    
+    public double cosh(double x){
+        return Math.cosh(x);
+    }
+    
+    public double sinh(double x){
+        return Math.sinh(x);
+    }
+
+    public double acos(double x){
+        return Math.acos(x);
+    }
+    
+    public double tan(double x){
+        return Math.tan(x);
+    }
+    
+    public double atan(double x){
+        return Math.atan(x);
+    }
+    
+    public double tanh(double x){
+        return Math.tanh(x);
+    }
+    
+    public double theta(double x, double y){
+        return Math.atan2(y,x);
+    }
+    
+    public double cubicRoot(double x){
+        return Math.cbrt(x);
+
     public void switchUnitsMode(String mode){
         switch(mode){
             case "degrees" : this.currentUnitsMode = "radians";
@@ -188,5 +257,6 @@ public class Display {
     
     public void setUnitsMode(String mode){
         this.currentUnitsMode = mode;
+
     }
 }
