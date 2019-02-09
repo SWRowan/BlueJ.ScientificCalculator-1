@@ -89,5 +89,8 @@ public class Display {
         this.currentDisplay = 0;
     }
     
+    public double add(double d1, double d2){
+        return d1 + d2;
+    }
     
 }
