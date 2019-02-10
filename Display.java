@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Display {
 
@@ -19,6 +20,7 @@ public class Display {
     private String memoryValue = "0";
     private String currentDisplayMode = "decimal";
     private String currentUnitsMode = "degrees";
+    private boolean correctInput = false;
 
     public Display() {
         this(System.in, System.out);
@@ -65,7 +67,15 @@ public class Display {
      */
     public Double getDoubleInput(String prompt, Object... args) {
         println(prompt);
-        return this.scanner.nextDouble();
+        Double d = new Double(0);
+
+        try {
+            d = this.scanner.nextDouble();
+            correctInput = true;
+        } catch(InputMismatchException ex){
+            println("Error: not a numerical value");
+        }
+        return d;
     }
 
     /**
@@ -75,6 +85,7 @@ public class Display {
      */
     public String getStringInput(String prompt, Object... args) {
         println(prompt);
+
         return this.scanner.next();
     }
 
@@ -89,12 +100,11 @@ public class Display {
     public void changeDisplay(String s){
         this.currentDisplay = s;
     }
-    
+
     public double add(double x, double y){
         return x + y;
 
     }
-
 
     public void switchDisplayMode(){
         switch(currentDisplayMode){
@@ -168,67 +178,66 @@ public class Display {
         }
 
     }
-    
+
     public void switchUnitsMode(String mode){
         switch(mode){
             case "degrees" : this.currentUnitsMode = "radians";
             this.switchUnitsMode();
             break;
-            
+
             case "radians" : this.currentUnitsMode = "degrees";
             this.switchUnitsMode();
             break;
-            
+
         }
-        
+
     }
-    
+
     public void setUnitsMode(String mode){
         this.currentUnitsMode = mode;
 
     }
-    
 
     public double subtract(double x, double y){
         return x - y;
     }
-    
+
     public double multiply(double x, double y){
         return x * y;
     } 
-    
+
     public double divide(double x, double y){
         return x / y;
     }
-    
+
     public double modulous(double x, double y){
         return x % y;
     }
-    
+
     public double exponent(double x, double y){
         return Math.pow(x, y);
     }
-    
+
     public double squareRoot(double x){
         return Math.sqrt(x);
     }
-    
+
     public double sin(double x){
         return Math.sin(x);
     }
-    
+
     public double asin(double x){
         return Math.asin(x);
     }
-    
+
     public double cos(double x){
         return Math.cos(x);
     }
-    
+
     public double cosh(double x){
         return Math.cosh(x);
     }
-    
+
     public double sinh(double x){
         return Math.sinh(x);
     }
@@ -236,38 +245,40 @@ public class Display {
     public double acos(double x){
         return Math.acos(x);
     }
-    
+
     public double tan(double x){
         return Math.tan(x);
     }
-    
+
     public double atan(double x){
         return Math.atan(x);
     }
-    
+
     public double tanh(double x){
         return Math.tanh(x);
     }
-    
+
     public double theta(double x, double y){
         return Math.atan2(y,x);
     }
-    
+
     public double cubicRoot(double x){
         return Math.cbrt(x);
     }
 
     public void superCalc(){
-    boolean run = true;
+        boolean run = true;
         Display display = new Display();
-        display.println("TIME TO CALCULATE!");
+        display.println("TIME TO CALCULATE!\n");
         Double x = display.getDoubleInput("Enter a number");
 
-        while (run){
 
-            String s = display.getStringInput("\nEnter an operator");
-            s = s.toLowerCase();
-            
+        while (run){
+            //display.println("+  -  *  /  %");
+            display.println("\n[+]  [-]  [*]  [/]  [%%]  [^]  [sqrt]  [cbrt]  [theta]");
+            display.println("[sin]  [cos]  [tan]  [sinh]  [cosh]  [tanh]  [asin]  [acos]  [atan]");
+            display.println("[changebase]  [binary]  [octal]  [hex]  [changeunits]  [radians]  [degrees]\n");
+            String s = display.getStringInput("Enter an operator: ");
             Double result = 0.0;
 
             switch(s){
@@ -275,9 +286,9 @@ public class Display {
                 case "add" : 
                 case "sum" :
                 case "plus": 
-                double addY = display.getDoubleInput("Enter another number");
+                double addY = display.getDoubleInput("\nEnter another number");
                 result = display.add(x, addY);
-                display.println("%f %s %f = %f", x, s, addY, result);
+                display.println("\n%f %s %f = %f", x, s, addY, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -285,9 +296,9 @@ public class Display {
                 case "-": 
                 case "subtract": 
                 case "minus":
-                double subY = display.getDoubleInput("Enter another number");
+                double subY = display.getDoubleInput("\nEnter another number");
                 result = display.subtract(x, subY);
-                display.println("%f %s %f = %f", x, s, subY, result);
+                display.println("\n%f %s %f = %f", x, s, subY, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -295,9 +306,9 @@ public class Display {
                 case "/":
                 case "divide":
                 case "divided by":
-                double divY = display.getDoubleInput("Enter another number");
+                double divY = display.getDoubleInput("\nEnter another number");
                 result = display.divide(x, divY);
-                display.println("%f %s %f = %f", x, s, divY, result);
+                display.println("\n%f %s %f = %f", x, s, divY, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -305,9 +316,9 @@ public class Display {
                 case "*" :
                 case "times":
                 case "multiply":
-                double multiY = display.getDoubleInput("Enter another number");
+                double multiY = display.getDoubleInput("\nEnter another number");
                 result = display.multiply(x, multiY);
-                display.println("%f %s %f = %f", x, s, multiY, result);
+                display.println("\n%f %s %f = %f", x, s, multiY, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -315,17 +326,17 @@ public class Display {
                 case "%" :
                 case "mod":
                 case "remainder":
-                double modY = display.getDoubleInput("Enter another number");
+                double modY = display.getDoubleInput("\nEnter another number");
                 result = display.modulous(x, modY);
-                display.println("%f %s %f = %f", x, s, modY, result);
+                display.println("\n%f %s %f = %f", x, s, modY, result);
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "^" : 
-                double expoY = display.getDoubleInput("Enter another number");
+                double expoY = display.getDoubleInput("\nEnter another number");
                 result = display.exponent(x, expoY);
-                display.println("%f %s %f = %f", x, s, expoY, result);
+                display.println("\n%f %s %f = %f", x, s, expoY, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -394,9 +405,9 @@ public class Display {
                 break;
 
                 case "theta":
-                double thetaY = display.getDoubleInput("Enter another number");
+                double thetaY = display.getDoubleInput("\nEnter another number");
                 result = display.theta(thetaY, x);
-                display.println("%f %s %f = %f", thetaY, s, x, result);
+                display.println("\n%f %s %f = %f", thetaY, s, x, result);
                 display.changeDisplay(result.toString());
 
                 break;
@@ -429,21 +440,21 @@ public class Display {
                 case "binary" : 
                 display.changeDisplay("" + x);
                 display.switchDisplayMode(s);
-                display.println(display.getCurrentDisplay() + "\n");
+                display.println(display.getCurrentDisplay());
 
                 break;
 
                 case "octal" : 
                 display.changeDisplay("" + x);
                 display.switchDisplayMode(s);
-                display.println(display.getCurrentDisplay() + "\n");
+                display.println(display.getCurrentDisplay());
 
                 break;
 
                 case "hex" : 
                 display.changeDisplay("" + x);
                 display.switchDisplayMode(s);
-                display.println(display.getCurrentDisplay() + "\n");
+                display.println(display.getCurrentDisplay());
 
                 break;
 
@@ -485,32 +496,34 @@ public class Display {
                 case "radians" :
                 display.changeDisplay("" + x);
                 display.switchUnitsMode(s);
-                display.println(display.getCurrentDisplay() + "\n");
+                display.println(display.getCurrentDisplay());
 
                 break;
-                
-                default : result = 0.0;
+
+                default : 
+                display.println("Not a proper operator");
+                result = 0.0;
             }
 
-            String m = display.getStringInput("Enter 'm+' to save the value.  Enter 'c' to clear");
+            String m = display.getStringInput("\nEnter 'm+' to save the value.  Enter 'c' to clear");
             if(m.equals("m+")){
                 display.setMemoryValue(display.getCurrentDisplay());
-                display.println("%s has been saved to memory.", display.getMemoryValue()); 
+                display.println("\n%s has been saved to memory.", display.getMemoryValue()); 
             }
-            
-            String quit = display.getStringInput("Enter 'quit' to stop, 'mrc' to use saved value, or enter another number");
+            else if (m.equals("c")){
+                display.changeDisplay("0");
+            }
 
-            
-            
+            String quit = display.getStringInput("\nEnter 'quit' to stop, 'mrc' to use a saved value, or enter another number.");
+
             if (quit.equals("quit")){
                 run = false; 
             }
-            
-            
+
             if(run){
                 if(quit.equals("mrc")){
                     x = Double.valueOf(display.getMemoryValue());
-                    display.println(display.getMemoryValue());
+                    display.println("\n" + display.getMemoryValue());
                 }
                 else{
                     x = Double.valueOf(quit);
