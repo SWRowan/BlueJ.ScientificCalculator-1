@@ -491,6 +491,71 @@ public class DisplayTest {
         Assert.assertEquals(-3, expZ, .001);
     }
 
+    @Test
+    public void FactorialTest(){
+        
+        // Given
+        Display d = new Display();
+        double x = 5;
+        double y = 0;
+        
+        // When
+        double expX = d.factorial(x);
+        double expY = d.factorial(y);
+        
+        // Then
+        Assert.assertEquals(120, expX, .001);
+        Assert.assertEquals(1, expY, .001);
+        
+    }
+    
+    @Test
+    public void GCDTest(){
+        
+        // Given
+        Display d = new Display();
+        double x1 = 123;
+        double x2 = 33;
+        double y1 = 1;
+        double y2 = 42343;
+        double z1 = 57;
+        double z2 = 32;
+        
+        // When
+        double expX = d.gcd(x1, x2);
+        double expY = d.gcd(y1, y2);
+        double expZ = d.gcd(z1, z2);
+        
+        // Then
+        Assert.assertEquals(3, expX, .001);
+        Assert.assertEquals(1, expY, .001);
+        Assert.assertEquals(1, expZ, .001);
+        
+    }
+    
+    @Test
+    public void LCMTest(){
+        
+        // Given
+        Display d = new Display();
+        double x1 = 10;
+        double x2 = 5;
+        double y1 = 1;
+        double y2 = 50;
+        double z1 = 43;
+        double z2 = 53;
+        
+        // When
+        double expX = d.lcm(x1, x2);
+        double expY = d.lcm(y1, y2);
+        double expZ = d.lcm(z1, z2);
+        
+        // Then
+        Assert.assertEquals(10, expX, .001);
+        Assert.assertEquals(50, expY, .001);
+        Assert.assertEquals(2279, expZ, .001);
+    }
+  
 }
 
 
