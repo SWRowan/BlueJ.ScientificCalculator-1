@@ -20,7 +20,6 @@ public class Display {
     private String memoryValue = "0";
     private String currentDisplayMode = "decimal";
     private String currentUnitsMode = "degrees";
-    private boolean correctInput = false;
 
     public Display() {
         this(System.in, System.out);
@@ -71,7 +70,6 @@ public class Display {
 
         try {
             d = this.scanner.nextDouble();
-            correctInput = true;
         } catch(InputMismatchException ex){
             println("Error: not a numerical value");
         }
@@ -617,7 +615,11 @@ public class Display {
                     display.println("\n" + display.getMemoryValue());
                 }
                 else{
-                    x = Double.valueOf(quit);
+                   try{
+                        x = Double.valueOf(quit);
+                    } catch(NumberFormatException ex) {
+                        x = display.getDoubleInput("\nError.  Enter a numerical value.");
+                    }
                 }
                 display.setCurrentDisplayMode("decimal");
                 display.setUnitsMode("degrees");
