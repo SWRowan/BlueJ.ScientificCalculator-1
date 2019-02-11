@@ -8,7 +8,7 @@
  * @version 2/11/2019
  */
 
-import java.io.InputStream;
+import java.io.InputStream; 
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -16,14 +16,14 @@ import java.util.InputMismatchException;
 
 public class Display {
 
-    private final Scanner scanner;
+    private final Scanner scanner; 
     private final PrintStream out;
     private String currentDisplay = "0";
     private String memoryValue = "0";
     private String currentDisplayMode = "decimal";
     private String currentUnitsMode = "degrees";
 
-    public Display() {
+    public Display() {// Displaying 
         this(System.in, System.out);
     }
 
@@ -41,16 +41,17 @@ public class Display {
      * @param args : optional arguments to send for string formatting
      */
     public void print(String val, Object... args) {
-        out.format(val, args);
+        out.format(val, args); // 
     }
 
     /**
      * @param val  : text to display on console
      * @param args : optional arguments to send for string formatting
      */
+    // This prints out a line
 
     public void println(String val, Object... args) {
-        print(val + "\n", args);
+        print(val + "\n", args); 
     }
 
     public Scanner getScanner(){
@@ -66,6 +67,7 @@ public class Display {
      * @param args   : optional arguments to send for string formatting
      * @return user's input as double
      */
+    
     public Double getDoubleInput(String prompt, Object... args) {
         println(prompt);
         Double d = new Double(0);
@@ -89,13 +91,18 @@ public class Display {
         return this.scanner.next();
     }
 
+    // This gets the currentDisplay variable
     public String getCurrentDisplay(){
         return this.currentDisplay;
     }
+    
+    //This clears the display back to zero
 
     public void clearDisplay(){
         this.currentDisplay = "0";
     }
+    
+    // This changes the display from the current display
 
     public void changeDisplay(String s){
         this.currentDisplay = s;
@@ -105,6 +112,9 @@ public class Display {
         return x + y;
 
     }
+    
+      
+    // When using the Switch method is converting different operators
 
     public void switchDisplayMode(){
         switch(currentDisplayMode){
@@ -152,14 +162,20 @@ public class Display {
     public void setCurrentDisplayMode(String mode){
         this.currentDisplayMode = mode;
     }
+   
+    //Memory saves previous value from input
 
     public void setMemoryValue(String s){
         this.memoryValue = s;
     }
+    
+    // This gives back the value that was saved
 
     public String getMemoryValue(){
         return this.memoryValue;
     }
+    
+    
 
     public void switchUnitsMode(){
         Double doubleValue = Double.valueOf(currentDisplay);
@@ -197,6 +213,12 @@ public class Display {
         this.currentUnitsMode = mode;
 
     }
+
+    
+    public String getUnitsMode(){
+        return this.currentUnitsMode;
+    }
+     // This is all the operations
 
     public double subtract(double x, double y){
         return x - y;
@@ -266,6 +288,7 @@ public class Display {
         return Math.cbrt(x);
     }
 
+
     /**
      * inverse calculates the inverse of a number 
      *
@@ -327,6 +350,9 @@ public class Display {
     public double lcm(double x, double y){
         return x * (y / gcd(x, y));
     }
+
+
+     // SuperCalc is the controller and where all the operators will be assigned
 
     public void superCalc(){
         boolean run = true;
