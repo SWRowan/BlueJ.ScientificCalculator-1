@@ -23,14 +23,29 @@ public class Display {
     private String currentDisplayMode = "decimal";
     private String currentUnitsMode = "degrees";
 
+    /**
+     * Display is a constructor for a Display object
+     */
     public Display() {// Displaying 
         this(System.in, System.out);
     }
 
+    /**
+     * Display is a constructor for a Display object
+     * 
+     * @param inputStream : user inputStream
+     * @param outputStream : program outputStream
+     */
     public Display(InputStream inputStream, OutputStream outputStream) {
         this(new Scanner(inputStream), new PrintStream(outputStream));
     }
 
+    /**
+     * Display is a constructor for a Display object
+     * 
+     * @param scanner : a Scanner for user input
+     * @param printStream : a PrintStream for program output
+     */
     public Display(Scanner scanner, PrintStream printStream) {
         this.scanner = scanner;
         this.out = printStream;
@@ -49,15 +64,24 @@ public class Display {
      * @param args : optional arguments to send for string formatting
      */
     // This prints out a line
-
     public void println(String val, Object... args) {
         print(val + "\n", args); 
     }
 
+    /**
+     * getScanner is a getter for scanner
+     * 
+     * @return the display's scanner
+     */
     public Scanner getScanner(){
         return this.scanner;
     }
 
+    /**
+     * getPrintStream is a getter for out
+     * 
+     * @return the display's PrintStream
+     */
     public PrintStream getPrintStream(){
         return this.out;
     }
@@ -65,9 +89,10 @@ public class Display {
     /**
      * @param prompt : text to display to user
      * @param args   : optional arguments to send for string formatting
+     * 
      * @return user's input as double
      */
-    
+
     public Double getDoubleInput(String prompt, Object... args) {
         println(prompt);
         Double d = new Double(0);
@@ -91,30 +116,47 @@ public class Display {
         return this.scanner.next();
     }
 
-    // This gets the currentDisplay variable
+    /**
+     * getCurrentDisplay gets the currentDisplay variable
+     * 
+     * @return the display's currentDisplay
+     */
     public String getCurrentDisplay(){
         return this.currentDisplay;
     }
-    
-    //This clears the display back to zero
 
+    /**
+     * clearDisplay clears the display back to zero
+     */
     public void clearDisplay(){
         this.currentDisplay = "0";
     }
-    
-    // This changes the display from the current display
 
+    /**
+     * changeDisplay changes the display from the current display
+     * 
+     * @param s : a String that will be the currentDisplay
+     */
     public void changeDisplay(String s){
         this.currentDisplay = s;
     }
 
+    /** add calculates the sum of two numbers
+     * 
+     * @param x : a double to be added
+     * @param y : a double to be added
+     * 
+     * @return a double that is the sum of x and y
+     */
     public double add(double x, double y){
         return x + y;
 
     }
-    
-      
-    // When using the Switch method is converting different operators
+
+    /**
+     * switchDisplayMode() toggles currentDisplay value through binary, octal, 
+     * hexadecimal, and decimal
+     */
 
     public void switchDisplayMode(){
         switch(currentDisplayMode){
@@ -143,6 +185,11 @@ public class Display {
         }
     }
 
+    /**
+     * switchDisplayMode switches current Display to specified mode
+     * 
+     * @param mode : a String "binary", "octal", or "hex" that indicates which mode to switch to
+     */
     public void switchDisplayMode(String mode){
         switch(mode){
             case "binary" : this.currentDisplayMode = "decimal";
@@ -159,28 +206,46 @@ public class Display {
         }
     }
 
+    /**
+     * setCurrentDisplayMode is a setter for currentDisplayMode
+     * 
+     * @param mode : String "decimal", "octal", "binary", or "hex"
+     * 
+     */
     public void setCurrentDisplayMode(String mode){
         this.currentDisplayMode = mode;
     }
-    
+
+    /**
+     * setUnitsMode is a setter for currentUnitsMode
+     * 
+     * @param mode : String "radians" or "degrees"
+     */
     public void setUnitsMode(String mode){
         this.currentUnitsMode = mode;
     }
-   
-    //Memory saves previous value from input
 
+    /**
+     * setMemoryValue saves previous value
+     * 
+     * @param s : a String that is the value to be saved as memoryValue
+     */
     public void setMemoryValue(String s){
         this.memoryValue = s;
     }
-    
-    // This gives back the value that was saved
 
+    /**
+     * getMemoryValue gives back the value that was saved
+     * 
+     * @return the Display's current memory value
+     */
     public String getMemoryValue(){
         return this.memoryValue;
     }
-    
-    
 
+    /**
+     * switchUnitsMode toggle display value between radians and degrees
+     */
     public void switchUnitsMode(){
         Double doubleValue = Double.valueOf(currentDisplay);
         switch(currentUnitsMode){
@@ -199,6 +264,11 @@ public class Display {
 
     }
 
+    /**
+     * switchUnitsMode set units mode to radians or degrees
+     * 
+     * @param mode : String "radians" or "degrees"
+     */
     public void switchUnitsMode(String mode){
         switch(mode){
             case "degrees" : this.setUnitsMode("radians");
@@ -213,81 +283,208 @@ public class Display {
 
     }
 
-
-    
+    /**
+     * getUnitsMode is a getter for currentUnitsMode
+     * 
+     * @return the display's currentUnitsMode
+     */
     public String getUnitsMode(){
         return this.currentUnitsMode;
     }
-     // This is all the operations
+    // This is all the operations
 
+    /**
+     * subtract calculates the difference between two numbers
+     * 
+     * @param x : a number
+     * @param y : a number to subtract from x
+     * 
+     * @return the difference between x and y
+     */
     public double subtract(double x, double y){
         return x - y;
     }
 
+    /**
+     * multiply calculates the product of two numbers
+     * 
+     * @param x : a number
+     * @param y : a number to multiply by x
+     * 
+     * @return the product of x and y
+     */
     public double multiply(double x, double y){
         return x * y;
     } 
 
+    /**
+     * divide finds the quotient of two numbers
+     * 
+     * @param x : a number that is the dividend
+     * @param y : a number that is the divisor
+     * 
+     * @return the quotient of x and y
+     */
     public double divide(double x, double y){
         return x / y;
     }
 
-    public double modulous(double x, double y){
+    /**
+     * modulus calculates the remainder when two numbers are divided
+     * 
+     * @param x : a number that is the dividend
+     * @param y : a number that is the divisor
+     * 
+     * @return the remainder when x is divided by y
+     */
+    public double modulus(double x, double y){
         return x % y;
     }
 
+    /**
+     * exponent calculates the value of a number raised to an exponent
+     * 
+     * @param x : a number
+     * @param y : a number that is the exponent value
+     * 
+     * @return x raised to the power y
+     */
     public double exponent(double x, double y){
         return Math.pow(x, y);
     }
 
+    /**
+     * squareRoot calculates the square root of a numbre
+     * 
+     * @param x : a number
+     * 
+     * @return the square root of x
+     */
     public double squareRoot(double x){
         return Math.sqrt(x);
     }
 
+    /**
+     * sin calculates the sine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the sin of x
+     */
     public double sin(double x){
         return Math.sin(x);
     }
 
+    /**
+     * asin calculates the inverse sine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the inverse sin of x
+     */
     public double asin(double x){
         return Math.asin(x);
     }
 
+    /**
+     * cos calculates the cosine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the cos of x
+     */
     public double cos(double x){
         return Math.cos(x);
     }
 
+    /**
+     * cosh calculates the hyperbolic cosine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the hyberbolic cos of x
+     */
     public double cosh(double x){
         return Math.cosh(x);
     }
 
+    /**
+     * sinh calculates the hyperbolic sine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the hyberbolic sin of x
+     */
     public double sinh(double x){
         return Math.sinh(x);
     }
 
+    /**
+     * acos calculates the inverse cosine of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the inverse cos of x
+     */
     public double acos(double x){
         return Math.acos(x);
     }
 
+    /**
+     * tan calculates the tangent of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the tan of x
+     */
     public double tan(double x){
         return Math.tan(x);
     }
 
+    /**
+     * atan calculates the inverse tangent of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the inverse tan of x
+     */
     public double atan(double x){
         return Math.atan(x);
     }
 
+    /**
+     * tanh calculates the hyperbolic tangent of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the tanh of x
+     */
     public double tanh(double x){
         return Math.tanh(x);
     }
 
+    /**
+     * theta calculates the angle of a point (x, y)
+     * 
+     * @param x : a number that is the x coordinate
+     * @param y : a number that is the y coordinate
+     * 
+     * @return the angle theta between the x axis and (x, y)
+     */
     public double theta(double x, double y){
         return Math.atan2(y,x);
     }
 
+    /**
+     * cubicRoot calculates the cubic root of a number
+     * 
+     * @param x : a number
+     * 
+     * @return the cubic root of x
+     */
     public double cubicRoot(double x){
         return Math.cbrt(x);
     }
-
 
     /**
      * inverse calculates the inverse of a number 
@@ -351,9 +548,9 @@ public class Display {
         return x * (y / gcd(x, y));
     }
 
-
-     // SuperCalc is the controller and where all the operators will be assigned
-
+    /**
+     * SuperCalc runs the program
+     */
     public void superCalc(){
         boolean run = true;
         Display display = new Display();
@@ -420,7 +617,7 @@ public class Display {
                 case "mod":
                 case "remainder":
                 double modY = display.getDoubleInput("\nEnter another number");
-                result = display.modulous(x, modY);
+                result = display.modulus(x, modY);
                 display.println("\n%s %% %s = %s", String.format("%s", x), String.format("%s", modY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
@@ -653,7 +850,7 @@ public class Display {
             }
 
             String m = display.getStringInput("\nEnter 'm+' to save the value.  Enter 'c' to clear");
-            
+
             // if user enters m+, sets memoryValue to currentDisplay
             if(m.equals("m+")){
                 if (display.getCurrentDisplay().equals("Infinity")){

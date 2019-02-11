@@ -189,7 +189,7 @@ public class DisplayTest {
     } 
 
     @Test
-    public void ModulousTest(){
+    public void ModulusTest(){
         Display d = new Display();
 
         //Given 
@@ -199,8 +199,8 @@ public class DisplayTest {
         double b2 = 2;
 
         //When
-        double expA = d.modulous(a1, a2);
-        double expB = d.modulous(b1, b2);
+        double expA = d.modulus(a1, a2);
+        double expB = d.modulus(b1, b2);
 
         //Then 
         Assert.assertEquals(0, expA, .001);
