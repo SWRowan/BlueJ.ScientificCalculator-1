@@ -1,9 +1,11 @@
 
 /**
- * Write a description of class Display here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Display contains the state of the calculator and its display
+ * including user input and output.  Has methods for all calculator's
+ * mathematical functions.
+ * 
+ * @author Cara Eppes, Sean Rowan, Zaina King, Reese Watson
+ * @version 2/11/2019
  */
 
 import java.io.InputStream;
@@ -264,14 +266,32 @@ public class Display {
         return Math.cbrt(x);
     }
 
+    /**
+     * inverse calculates the inverse of a number 
+     *
+     * @param  x : number to calculate inverse of
+     * @return inverse of x
+     */
     public double inverse(double x){
         return 1 / x;
     }
 
+    /**
+     * invertSign changes the sign of the input number
+     *
+     * @param  x : number to change sign of
+     * @return x with inverted sign
+     */
     public double invertSign(double x){
         return -x;
     }
-    
+
+    /**
+     * factorial calculates factorial of a number
+     *
+     * @param  x : number to calculate factorial of
+     * @return factorial of x
+     */
     public double factorial(double x){
         double f = 1;
         for (int i = 1; i <= x; i++){
@@ -279,7 +299,14 @@ public class Display {
         }
         return f;
     }
-    
+
+    /**
+     * gcm calculates the greatest common divisor of two numbers
+     *
+     * @param  x : one number for gcd calculation
+     * @param  y : other number for gcd calculation
+     * @return gcd of x an y
+     */
     public double gcd(double x, double y){
         if (y == 0){
             return x;
@@ -288,12 +315,18 @@ public class Display {
             return gcd(y, x % y);
         }
     }
-    
+
+    /**
+     * lcm calculates the least common multiple of two numbers
+     *
+     * @param  x : one number for lcm calculation
+     * @param  y : other number for lcm calculation
+     * @return lcm of x an y
+     */
+
     public double lcm(double x, double y){
         return x * (y / gcd(x, y));
     }
-    
-   
 
     public void superCalc(){
         boolean run = true;
@@ -306,7 +339,7 @@ public class Display {
             display.println("[sin]  [cos]  [tan]  [sinh]  [cosh]  [tanh]  [asin]  [acos]  [atan]");
             display.println("[changebase]  [binary]  [octal]  [hex]  [changeunits]  [radians]  [degrees]");
             display.println("[theta]  [inverse]  [invertsign]  [gcd]  [lcm]\n");
-            String s = display.getStringInput("Enter an operator: ");
+            String s = display.getStringInput("Enter an operator: ").toLowerCase();
             Double result = 0.0;
 
             switch(s){
@@ -375,12 +408,12 @@ public class Display {
                 display.changeDisplay(result.toString());
 
                 break;
-                
+
                 case "^2" :
                 result = display.exponent(x, 2);
                 display.println("\n%s ^2 = %s", String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
-                
+
                 break;
 
                 case "sin": 
@@ -556,36 +589,36 @@ public class Display {
                 display.changeDisplay(result.toString());
 
                 break;
-                
+
                 case "factorial" :
                 case "!" :
                 result = factorial(x);
                 display.println("\n%s! = %s", String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
-                
+
                 break;
-                
+
                 case "gcd":
                 double gcdY = display.getDoubleInput("\nEnter another number");
                 result = display.gcd(x, gcdY);
                 display.println("\ngcd(%s, %s) = %s", String.format("%s", x), String.format("%s", gcdY), String.format("%s", result));
                 display.changeDisplay(result.toString());
-                
+
                 break;
-                
+
                 case "lcm":
                 double lcmY = display.getDoubleInput("\nEnter another number");
                 result = display.lcm(x, lcmY);
                 display.println("\nlcm(%s, %s) = %s", String.format("%s", x), String.format("%s", lcmY), String.format("%s", result));
                 display.changeDisplay(result.toString());
-                
+
                 break;
-                
+
                 case "clear" :
                 case "c" :
                 display.clearDisplay();
                 display.println("\n0.0");
-                
+
                 break;
 
                 default : 
@@ -594,33 +627,50 @@ public class Display {
             }
 
             String m = display.getStringInput("\nEnter 'm+' to save the value.  Enter 'c' to clear");
+            
+            // if user enters m+, sets memoryValue to currentDisplay
             if(m.equals("m+")){
-                display.setMemoryValue(display.getCurrentDisplay());
-                display.println("\n%s has been saved to memory.", display.getMemoryValue()); 
+                if (display.getCurrentDisplay().equals("Infinity")){
+                    // if user tries to save Infinity, prints error and sets display to 0
+                    println("\nError.  Memory is not infinite...");
+                    display.changeDisplay("0");
+                }
+                else{
+                    display.setMemoryValue(display.getCurrentDisplay());
+                    display.println("\n%s has been saved to memory.", display.getMemoryValue()); 
+                }
             }
+            // if user enter c, sets display to 0
             else if (m.equals("c")){
                 display.changeDisplay("0");
             }
 
             String quit = display.getStringInput("\nEnter 'quit' to stop, 'mrc' to use a saved value, or enter another number.");
 
+            // if user enters quit, run = false to stop program
             if (quit.equals("quit")){
                 run = false; 
                 println("\n(╯°□°）╯︵ ┻━┻  I'm done with this calculator!");
             }
 
             if(run){
+                // if user enters mrc, display is set to memoryValue 
                 if(quit.equals("mrc")){
                     x = Double.valueOf(display.getMemoryValue());
                     display.println("\n" + display.getMemoryValue());
+                    display.changeDisplay(display.getMemoryValue());
                 }
                 else{
-                   try{
+                    // if user enters a number, display is changed to number
+                    try{
                         x = Double.valueOf(quit);
+                        display.changeDisplay(quit);
+                        // if user does not enter a proper value, prints an error
                     } catch(NumberFormatException ex) {
                         x = display.getDoubleInput("\nError.  Enter a numerical value.");
                     }
                 }
+                // resets mode to decimal and degrees
                 display.setCurrentDisplayMode("decimal");
                 display.setUnitsMode("degrees");
             }
