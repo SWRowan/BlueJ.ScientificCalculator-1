@@ -282,6 +282,19 @@ public class Display {
         return f;
     }
     
+    public double gcd(double x, double y){
+        if (y == 0){
+            return x;
+        }
+        else{
+            return gcd(y, x % y);
+        }
+    }
+    
+    public double lcm(double x, double y){
+        return x * (y / gcd(x, y));
+    }
+    
    
 
     public void superCalc(){
@@ -294,7 +307,7 @@ public class Display {
             display.println("\n[+]  [-]  [*]  [/]  [%%]  [^2]  [^x]  [sqrt]  [cbrt]  [!]");
             display.println("[sin]  [cos]  [tan]  [sinh]  [cosh]  [tanh]  [asin]  [acos]  [atan]");
             display.println("[changebase]  [binary]  [octal]  [hex]  [changeunits]  [radians]  [degrees]");
-            display.println("[theta]  [inverse]  [invertsign]\n");
+            display.println("[theta]  [inverse]  [invertsign]  [gcd]  [lcm]\n");
             String s = display.getStringInput("Enter an operator: ");
             Double result = 0.0;
 
@@ -532,8 +545,9 @@ public class Display {
                 break;
 
                 case "inverse" :
+                case "1/x" :
                 result = inverse(x);
-                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
+                display.println("\n1 / %s = %s", String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -549,6 +563,22 @@ public class Display {
                 case "!" :
                 result = factorial(x);
                 display.println("\n%s! = %s", String.format("%s", x), String.format("%s", result));
+                display.changeDisplay(result.toString());
+                
+                break;
+                
+                case "gcd":
+                double gcdY = display.getDoubleInput("\nEnter another number");
+                result = display.gcd(x, gcdY);
+                display.println("\ngcd(%s, %s) = %s", String.format("%s", x), String.format("%s", gcdY), String.format("%s", result));
+                display.changeDisplay(result.toString());
+                
+                break;
+                
+                case "lcm":
+                double lcmY = display.getDoubleInput("\nEnter another number");
+                result = display.lcm(x, lcmY);
+                display.println("\nlcm(%s, %s) = %s", String.format("%s", x), String.format("%s", lcmY), String.format("%s", result));
                 display.changeDisplay(result.toString());
                 
                 break;
@@ -578,6 +608,7 @@ public class Display {
 
             if (quit.equals("quit")){
                 run = false; 
+                println("\n(╯°□°）╯︵ ┻━┻  I'm done with this calculator!");
             }
 
             if(run){
