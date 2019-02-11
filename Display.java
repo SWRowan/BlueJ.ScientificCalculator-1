@@ -162,6 +162,10 @@ public class Display {
     public void setCurrentDisplayMode(String mode){
         this.currentDisplayMode = mode;
     }
+    
+    public void setUnitsMode(String mode){
+        this.currentUnitsMode = mode;
+    }
    
     //Memory saves previous value from input
 
@@ -180,13 +184,13 @@ public class Display {
     public void switchUnitsMode(){
         Double doubleValue = Double.valueOf(currentDisplay);
         switch(currentUnitsMode){
-            case "degrees" : this.currentUnitsMode = "radians";
+            case "degrees" : this.setUnitsMode("radians");
             Double doubleRadians = Math.toRadians(doubleValue);
             currentDisplay = doubleRadians.toString();
             print("\nRadian value: ");
             break;
 
-            case "radians" : this.currentUnitsMode = "degrees";
+            case "radians" : this.setUnitsMode("degrees");
             Double doubleDegrees = doubleValue + Math.PI/180;
             currentDisplay = doubleDegrees.toString();
             print("\nDegree value: ");
@@ -197,11 +201,11 @@ public class Display {
 
     public void switchUnitsMode(String mode){
         switch(mode){
-            case "degrees" : this.currentUnitsMode = "radians";
+            case "degrees" : this.setUnitsMode("radians");
             this.switchUnitsMode();
             break;
 
-            case "radians" : this.currentUnitsMode = "degrees";
+            case "radians" : this.setUnitsMode("degrees");
             this.switchUnitsMode();
             break;
 
@@ -209,10 +213,6 @@ public class Display {
 
     }
 
-    public void setUnitsMode(String mode){
-        this.currentUnitsMode = mode;
-
-    }
 
     
     public String getUnitsMode(){
