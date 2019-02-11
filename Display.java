@@ -273,6 +273,16 @@ public class Display {
     public double invertSign(double x){
         return -x;
     }
+    
+    public double factorial(double x){
+        double f = 1;
+        for (int i = 1; i <= x; i++){
+            f = f * i;
+        }
+        return f;
+    }
+    
+   
 
     public void superCalc(){
         boolean run = true;
@@ -281,9 +291,10 @@ public class Display {
         Double x = display.getDoubleInput("Enter a number");
 
         while (run){
-            display.println("\n[+]  [-]  [*]  [/]  [%%]  [^]  [sqrt]  [cbrt]  [theta]  [inverse]  [invertsign]");
+            display.println("\n[+]  [-]  [*]  [/]  [%%]  [^2]  [^x]  [sqrt]  [cbrt]  [!]");
             display.println("[sin]  [cos]  [tan]  [sinh]  [cosh]  [tanh]  [asin]  [acos]  [atan]");
-            display.println("[changebase]  [binary]  [octal]  [hex]  [changeunits]  [radians]  [degrees]\n");
+            display.println("[changebase]  [binary]  [octal]  [hex]  [changeunits]  [radians]  [degrees]");
+            display.println("[theta]  [inverse]  [invertsign]\n");
             String s = display.getStringInput("Enter an operator: ");
             Double result = 0.0;
 
@@ -294,7 +305,7 @@ public class Display {
                 case "plus": 
                 double addY = display.getDoubleInput("\nEnter another number");
                 result = display.add(x, addY);
-                display.println("\n%f %s %f = %f", x, s, addY, result);
+                display.println("\n%s + %s = %s", String.format("%s", x), String.format("%s", addY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -304,7 +315,7 @@ public class Display {
                 case "minus":
                 double subY = display.getDoubleInput("\nEnter another number");
                 result = display.subtract(x, subY);
-                display.println("\n%f %s %f = %f", x, s, subY, result);
+                display.println("\n%s - %s = %s", String.format("%s", x), String.format("%s", subY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -319,7 +330,7 @@ public class Display {
                 }
                 else{
                     result = display.divide(x, divY);
-                    display.println("\n%f %s %f = %f", x, s, divY, result);
+                    display.println("\n%s / %s = %s", String.format("%s", x), String.format("%s", divY), String.format("%s", result));
                     display.changeDisplay(result.toString());
                 }
 
@@ -330,7 +341,7 @@ public class Display {
                 case "multiply":
                 double multiY = display.getDoubleInput("\nEnter another number");
                 result = display.multiply(x, multiY);
-                display.println("\n%f %s %f = %f", x, s, multiY, result);
+                display.println("\n%s * %s = %s", String.format("%s", x), String.format("%s", multiY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -340,78 +351,86 @@ public class Display {
                 case "remainder":
                 double modY = display.getDoubleInput("\nEnter another number");
                 result = display.modulous(x, modY);
-                display.println("\n%f %s %f = %f", x, s, modY, result);
+                display.println("\n%s %% %s = %s", String.format("%s", x), String.format("%s", modY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
-                case "^" : 
+                case "^x" : 
+                case "^" :
                 double expoY = display.getDoubleInput("\nEnter another number");
                 result = display.exponent(x, expoY);
-                display.println("\n%f %s %f = %f", x, s, expoY, result);
+                display.println("\n%s ^ %s = %s", String.format("%s", x), String.format("%s", expoY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
+                break;
+                
+                case "^2" :
+                result = display.exponent(x, 2);
+                display.println("\n%s ^2 = %s", String.format("%s", x), String.format("%s", result));
+                display.changeDisplay(result.toString());
+                
                 break;
 
                 case "sin": 
                 result = display.sin(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "asin": 
                 result = display.asin(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "sinh": 
                 result = display.sinh(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "cos": 
                 result = display.cos(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "acos": 
                 result = display.acos(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "cosh": 
                 result = display.cosh(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "tan": 
                 result = display.tan(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "atan": 
                 result = display.atan(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "tanh": 
                 result = display.tanh(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -419,7 +438,7 @@ public class Display {
                 case "theta":
                 double thetaY = display.getDoubleInput("\nEnter another number");
                 result = display.theta(thetaY, x);
-                display.println("\n%f %s %f = %f", thetaY, s, x, result);
+                display.println("\n%s theta %s = %s", String.format("%s", x), String.format("%s", thetaY), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -428,14 +447,14 @@ public class Display {
                 case "root":
                 case "square root":
                 result = display.squareRoot(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "cbrt":
                 result = display.cubicRoot(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
@@ -514,16 +533,31 @@ public class Display {
 
                 case "inverse" :
                 result = inverse(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
                 break;
 
                 case "invertsign" :
                 result = invertSign(x);
-                display.println("\n%s %f = %f", s, x, result);
+                display.println("\n%s %s = %s", s, String.format("%s", x), String.format("%s", result));
                 display.changeDisplay(result.toString());
 
+                break;
+                
+                case "factorial" :
+                case "!" :
+                result = factorial(x);
+                display.println("\n%s! = %s", String.format("%s", x), String.format("%s", result));
+                display.changeDisplay(result.toString());
+                
+                break;
+                
+                case "clear" :
+                case "c" :
+                display.clearDisplay();
+                display.println("\n0.0");
+                
                 break;
 
                 default : 
